@@ -15,7 +15,7 @@ enable_language(CXX)
 enable_language(C)
 
 set (PRAGMATIC_LIBRARIES)
-FIND_PACKAGE(VTK REQUIRED NO_MODULE)
+FIND_PACKAGE(VTK NO_MODULE)
 if(VTK_FOUND)
   message(STATUS "Found VTK: ${VTK_DIR} (found version \"${VTK_VERSION}\")")
 
