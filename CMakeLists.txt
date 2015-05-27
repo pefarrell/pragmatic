@@ -56,6 +56,15 @@ if (OPENMP_FOUND)
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif()
 
+find_package(PythonInterp 2.7)
+if(PYTHONINTERP_FOUND)
+    set(ADAPTIVITY_PY_IN "${CMAKE_CURRENT_SOURCE_DIR}/python/adaptivity.py.in")
+    set(ADAPTIVITY_PY "${CMAKE_CURRENT_SOURCE_DIR}/python/adaptivity.py")
+
+    # Generate adaptivity.py
+    configure_file(${ADAPTIVITY_PY_IN} ${ADAPTIVITY_PY})
+endif()
+
 FIND_PACKAGE(Metis REQUIRED)
 if(METIS_FOUND)
   include_directories(${METIS_INCLUDE_DIR})
