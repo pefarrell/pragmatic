@@ -238,7 +238,7 @@ extern "C" {
 
         refine.refine(L_ref);
         coarsen.coarsen(L_low, L_ref);
-        swapping.swap(0.95);
+        //swapping.swap(0.95);
 
         L_max = mesh->maximal_edge_length();
 
@@ -249,7 +249,7 @@ extern "C" {
       mesh->defragment();
 
       smooth.smart_laplacian(10);
-      smooth.optimisation_linf(10);
+      //smooth.optimisation_linf(10);
     }
   }
 
