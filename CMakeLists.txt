@@ -15,13 +15,17 @@ enable_language(CXX)
 enable_language(C)
 
 set (PRAGMATIC_LIBRARIES)
-FIND_PACKAGE(VTK NO_MODULE)
-if(VTK_FOUND)
-  message(STATUS "Found VTK: ${VTK_DIR} (found version \"${VTK_VERSION}\")")
+option(PRAGMATIC_ENABLE_VTK "Enable VTK input/output." ON)
 
-  add_definitions(-DHAVE_VTK)
-  include(${VTK_USE_FILE})
-  set (PRAGMATIC_LIBRARIES ${VTK_LIBRARIES} ${PRAGMATIC_LIBRARIES})
+if (PRAGMATIC_ENABLE_VTK)
+    FIND_PACKAGE(VTK NO_MODULE)
+    if(VTK_FOUND)
+      message(STATUS "Found VTK: ${VTK_DIR} (found version \"${VTK_VERSION}\")")
+
+      add_definitions(-DHAVE_VTK)
+      include(${VTK_USE_FILE})
+      set (PRAGMATIC_LIBRARIES ${VTK_LIBRARIES} ${PRAGMATIC_LIBRARIES})
+    endif()
 endif()
  
 include(CheckCXXCompilerFlag)
