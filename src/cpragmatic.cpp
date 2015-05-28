@@ -56,11 +56,11 @@ extern "C" {
   void pragmatic_dump(const char *filename){
     VTKTools<double>::export_vtu(filename, (Mesh<double>*)_pragmatic_mesh);
   }
-#endif
 
   void pragmatic_dump_debug(){
     pragmatic_dump("dump\0");
   }
+#endif
 
   /** Initialise pragmatic with mesh to be adapted. pragmatic_finalize must
       be called before this can be called again, i.e. cannot adapt

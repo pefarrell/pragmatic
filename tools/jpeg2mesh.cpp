@@ -40,7 +40,9 @@
 #include <getopt.h>
 
 #include "Mesh.h"
-#include "VTKTools.h"
+#ifdef HAVE_VTK
+  #include "VTKTools.h"
+#endif
 #include "MetricField.h"
 
 #include "Coarsen.h"
@@ -151,6 +153,7 @@ int main(int argc, char **argv){
 
   parse_arguments(argc, argv, infilename, verbose, factor);
 
+#ifdef HAVE_VTK
   // Read in image
   vtkSmartPointer<vtkJPEGReader> reader = vtkSmartPointer<vtkJPEGReader>::New();
   reader->SetFileName(infilename.c_str());
@@ -439,6 +442,9 @@ int main(int argc, char **argv){
     VTKTools<double>::export_vtu(outfilename.c_str(), mesh);
 
   delete mesh;
+#else
+    std::cerr<<"Prgamatic was configured without VTK"<<std::endl;
+#endif
 
   MPI_Finalize();
 
