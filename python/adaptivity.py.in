@@ -79,7 +79,7 @@ class ParameterException(Exception):
   pass
 
 try:
-  _libpragmatic = ctypes.cdll.LoadLibrary("${CMAKE_INSTALL_PREFIX}/${INSTALL_LIB_DIR}/libadjoint${CMAKE_SHARED_LIBRARY_SUFFIX}")
+  _libpragmatic = ctypes.cdll.LoadLibrary("${CMAKE_INSTALL_PREFIX}/${INSTALL_LIB_DIR}/libpragmatic${CMAKE_SHARED_LIBRARY_SUFFIX}")
 except:
   raise LibraryException("Failed to load libpragmatic")
 
