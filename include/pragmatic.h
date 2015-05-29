@@ -50,7 +50,9 @@
  * \li Bleeding edge developer site on <a href="https://launchpad.net/pragmatic">Launchpad</a>.
  */
 
+#if defined(__cplusplus)
 extern "C" {
+#endif
   void pragmatic_2d_begin(const int *NNodes, const int *NElements, const int *enlist, const double *x, const double *y);
   void pragmatic_3d_begin(const int *NNodes, const int *NElements, const int *enlist, const double *x, const double *y, const double *z);
   void pragmatic_vtk_begin(const char *filename);
@@ -66,4 +68,6 @@ extern "C" {
   void pragmatic_get_metric(double *metric);
   void pragmatic_dump(const char *filename);
   void pragmatic_end();
+#if defined(__cplusplus)
 }
+#endif
