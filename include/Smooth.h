@@ -762,7 +762,9 @@ template<typename real_t, int dim>
       if(_mesh->quality[it]<worst_element.first)
         worst_element = std::pair<double, index_t>(_mesh->quality[it], it);
     }
-    assert(worst_element.second!=-1);
+    //assert(worst_element.second!=-1);
+    if(worst_element.second == -1)
+      return false;
 
     // Return if it is already "good enough".
     if(worst_element.first>good_q)
@@ -923,7 +925,9 @@ template<typename real_t, int dim>
       if(_mesh->quality[it]<worst_element.first)
         worst_element = std::pair<double, index_t>(_mesh->quality[it], it);
     }
-    assert(worst_element.second!=-1);
+    //assert(worst_element.second!=-1);
+    if(worst_element.second == -1)
+      return false;
     
     // Jump out if already good enough.
     if(worst_element.first>good_q)
