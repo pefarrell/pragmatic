@@ -208,26 +208,28 @@ extern "C" {
       Refine<double, 2> refine(*mesh);
       Swapping<double, 2> swapping(*mesh);
 
-      double L_max = mesh->maximal_edge_length();
+      for (int outer = 0; outer < 2; outer++){
+        double L_max = mesh->maximal_edge_length();
 
-      double alpha = sqrt(2.0)/2.0;
-      for(size_t i=0;i<20;i++){
-        double L_ref = std::max(alpha*L_max, L_up);
+        double alpha = sqrt(2.0)/2.0;
+        for(size_t i=0;i<20;i++){
+          double L_ref = std::max(alpha*L_max, L_up);
 
-        coarsen.coarsen(L_low, L_ref);
-        swapping.swap(0.7);
-        refine.refine(L_ref);
+          coarsen.coarsen(L_low, L_ref);
+          swapping.swap(0.9);
+          //refine.refine(L_ref);
 
-        L_max = mesh->maximal_edge_length();
+          L_max = mesh->maximal_edge_length();
 
-        if(L_max>1.0 && (L_max-L_up)<0.01)
-          break;
+          if(L_max>1.0 && (L_max-L_up)<0.01)
+            break;
+        }
+
+        mesh->defragment();
+
+        smooth.smart_laplacian(20);
+        smooth.optimisation_linf(20);
       }
-
-      mesh->defragment();
-
-      smooth.smart_laplacian(20);
-      smooth.optimisation_linf(20);
     }else{
       Coarsen<double, 3> coarsen(*mesh);
       Smooth<double, 3> smooth(*mesh);
